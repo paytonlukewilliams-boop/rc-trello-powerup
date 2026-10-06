@@ -106,7 +106,9 @@ var STYLE = {
   "🕳 DARK WORLDS":           {name:"[RC] DARK WORLDS",         tag:"DW", color:"black",  div:["Arc 2: The Overgrowth"]},
   "🕳 DARK WORLDS (ARCS 3–5)":{name:"[RC] DARK WORLDS (ARCS 3–5)", tag:"DW", color:"black", div:[]}
 };
-var DIVIDER = "────────────────────";
+var DIVIDER = "------------------------------";
+var OLD_DIVIDER = "────────────────────";
+function isDivider(n){ return n === DIVIDER || n === OLD_DIVIDER || /^-{3,}$/.test(n); }
 function mono(str){
   var out = "";
   for (var ch of str){
@@ -155,10 +157,11 @@ async function restyle(){
       }
       var cards = await call("GET", "/lists/"+L.id+"/cards?fields=name,pos,cover");
       cards.sort(function(a,b){ return a.pos - b.pos; });
-      var hasDivider = cards.some(function(c){ return c.name === DIVIDER; });
+      var hasDivider = cards.some(function(c){ return isDivider(c.name); });
       for (var ci=0; ci<cards.length; ci++){
         var c = cards[ci];
-        if (c.name === DIVIDER) continue;
+        if (c.name === OLD_DIVIDER){ await putJSON("/cards/"+c.id, {name: DIVIDER}); log("  ~ fixed old divider"); continue; }
+        if (isDivider(c.name)) continue;
         var orig = c.name, upd = {};
         if (orig.charAt(0) !== "[") upd.name = styledCardName(orig, st, useFont);
         if (useCovers && !hasImageCover(c.cover)) upd.cover = {color: st.color, size: "full", brightness: "dark"};
