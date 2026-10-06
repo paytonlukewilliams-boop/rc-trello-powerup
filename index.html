@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  <script src="./config.js"></script>
+</head>
+<body>
+<script>
+  var ICON = new URL("./icon.svg", window.location.href).href;
+  window.TrelloPowerUp.initialize({
+    "board-buttons": function (t) {
+      return [{
+        icon: { dark: ICON, light: ICON },
+        text: "Import Resonance: Core",
+        condition: "admin",
+        callback: function (t) {
+          return t.modal({ url: "./import.html", title: "Resonance: Core Importer", height: 560 });
+        }
+      }];
+    },
+    "authorization-status": function (t) {
+      return t.getRestApi().isAuthorized().then(function (ok) { return { authorized: ok }; });
+    },
+    "show-authorization": function (t) {
+      return t.modal({ url: "./import.html", title: "Resonance: Core Importer", height: 560 });
+    }
+  }, window.RC_CONFIG);
+</script>
+</body>
+</html>

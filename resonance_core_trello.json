@@ -1,0 +1,1104 @@
+{
+  "board": "Resonance: Core",
+  "labels": {
+    "Rules": "red",
+    "Events": "orange",
+    "Lore": "purple",
+    "Mechanics": "blue",
+    "Combat": "red",
+    "Titles": "yellow",
+    "Items": "green",
+    "Boons & Flaws": "pink",
+    "Bestiary": "lime",
+    "Resonance": "sky",
+    "Crashes": "black",
+    "Lumari": "pink",
+    "Dark Worlds": "black"
+  },
+  "parts": [
+    {
+      "part": 1,
+      "title": "Public (import at launch)",
+      "lists": [
+        {
+          "name": "📌 START HERE",
+          "cards": [
+            {
+              "name": "Welcome to Resonance: Core",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "# RESONANCE: CORE\n*A strange new game shows up on every computer in town. It's funny, it's harmless, and it has a cute little guide named HELPR. Then something breaks the Core, and the game starts coming out.*\n\nA story-driven text RP on Roblox, inspired by **Homestuck**, **Deltarune**, and **Earthbound**.\n\n**Worldsong Online** just appeared on every PC in **Stillwater**. Nobody installed it. Nobody knows who made it. Everybody's playing it."
+            },
+            {
+              "name": "How to Join",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "1. Join the Discord and read **#rules**.\n2. Read this Trello (start with **Characters**, **Titles**, **Magic**, and **Stats**).\n3. Grab the **Character Template** from **#how-to-submit**.\n4. Post your filled template in **#character-submissions**.\n5. Wait for a Reviewer to approve it or ask for changes.\n6. Once approved, you get the **Player** role. Welcome to Stillwater."
+            },
+            {
+              "name": "What You Submit",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "- Real character (art, bio, personality, stats)\n- Game Avatar (name, look, stats)\n- Title (Role + Element)\n- Boons & Flaws\n- 3 starting abilities\n- Biography\n\n⚠️ **Your Magic is permanent.** It will shape your other powers later in the story. Choose carefully."
+            },
+            {
+              "name": "Schedule",
+              "labels": [
+                "Events"
+              ],
+              "desc": "- **Canon story events** happen **once a week**. That's when the story moves forward.\n- **Free RP runs 24/7.** Grind, fight, hang out, and stat farm in both worlds whenever you want.\n- Event times are posted in **#event-schedule**."
+            },
+            {
+              "name": "Glossary",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "- **WSO:** Worldsong Online, the game.\n- **Overworld:** the real town of Stillwater.\n- **Game Avatar:** your character inside WSO.\n- **Title:** your Role + Element, like *Herald of Static*.\n- **MP:** Magic Points. What your abilities cost.\n- **Ability tag:** the required tag at the end of every combat action.\n- **Notes:** WSO money.\n- **PVE / PVP:** fighting enemies / fighting players."
+            }
+          ]
+        },
+        {
+          "name": "📜 RULES",
+          "cards": [
+            {
+              "name": "General Server Rules",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "1. Be respectful. No harassment, slurs, or targeting real people.\n2. Keep OOC drama out of IC, and IC drama out of OOC.\n3. Follow Discord's and Roblox's Terms of Service.\n4. Staff decisions are final. Disagree respectfully in a ticket.\n5. No spoiling story events for people who missed them."
+            },
+            {
+              "name": "RP Rules",
+              "labels": [
+                "Rules"
+              ],
+              "desc": "- **No metagaming:** your character only knows what they learned IC.\n- **No godmodding:** you can't auto-hit, auto-dodge, or ignore damage.\n- **No powergaming:** stay inside your approved abilities, stats, and items.\n- Respect the setting. WSO is a game; Stillwater is a normal town (for now)."
+            },
+            {
+              "name": "Combat Rules",
+              "labels": [
+                "Combat",
+                "Rules"
+              ],
+              "desc": "- Combat is **turn-based**.\n- Every combat action **must** end with an **ability tag**. No tag = the action doesn't count.\n- One action per turn plus movement.\n- Use only approved abilities and items."
+            },
+            {
+              "name": "PVP Rules",
+              "labels": [
+                "Combat",
+                "Rules"
+              ],
+              "desc": "- **Anyone can jump or kill anyone.** No consent needed.\n- **Fights in the Overworld are life or death.**\n- **Villains are allowed.** Make one and go crazy.\n- Kills only count if the fight used **ability tags**. Staff can review the chat log if there's a dispute.\n- Certain PVP logs can earn **XP or instant rank-ups**. Staff watch for abuse (like trading wins with friends)."
+            },
+            {
+              "name": "Combat Logging",
+              "labels": [
+                "Combat",
+                "Rules"
+              ],
+              "desc": "**Combat logging** = leaving while you're actively in an in-character fight.\n\nStaff decide what happens **case by case**, since real disconnects happen."
+            },
+            {
+              "name": "PVE Rules",
+              "labels": [
+                "Combat",
+                "Rules"
+              ],
+              "desc": "PVE (fighting enemies) only runs when **staff are on**, or when **approved by staff/helpers**."
+            }
+          ]
+        },
+        {
+          "name": "🌍 THE WORLD",
+          "cards": [
+            {
+              "name": "Stillwater",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "The **Overworld**. An ordinary small town: suburbs, a main street, a mall, a school, a diner, an arcade. Nothing important has ever happened here.\n\nYou play your **real character** in Stillwater."
+            },
+            {
+              "name": "Worldsong Online (WSO)",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "An **MMORPG** that showed up on every computer in Stillwater overnight. No publisher. No website. No update notes. Everyone calls it **WSO**.\n\nYou play your **Game Avatar** inside WSO."
+            },
+            {
+              "name": "Logging In",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "1. Walk up to any computer in Stillwater and press the button.\n2. The PC boots and the desktop opens.\n3. Click **Worldsong Online**.\n4. The first time, you'll build your **Game Avatar**.\n5. You spawn on **Firstlight Isle**, high in the sky."
+            },
+            {
+              "name": "Firstlight Isle",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "WSO's starter zone: a peaceful tutorial island floating in the sky. Grassy cliffs, a spawn plaza with a fountain, training dummies, a starter shop, and the **Combiner**.\n\nAt the center, a ring of standing stones surrounds a big shining crystal: **the Core**.\n\nAround the edges are huge glowing archways leading down through the clouds: the **portals** to WSO's other worlds. They're closed for now."
+            },
+            {
+              "name": "HELPR",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "WSO's tutorial guide. A small floating mascot with a round body, a static-filled screen for a face with one big pixel eye, tiny paws, and a \"!\" that pops over its head.\n\nHyper, cheerful, full of bad puns, and calls everyone **PLAYER**. Types in ALL CAPS.\n\n> HELLO PLAYER!! WELCOME TO WORLDSONG ONLINE!!! I'M HELPR, YOUR HELPFUL HELPER WHO HELPS :D"
+            },
+            {
+              "name": "The Core",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "A huge shining crystal at the center of Firstlight Isle, surrounded by standing stones.\n\n> THAT BIG SHINY ROCK IS THE CORE!! PLEASE DO NOT LICK THE CORE :D — HELPR"
+            }
+          ]
+        },
+        {
+          "name": "🧍 CHARACTERS",
+          "cards": [
+            {
+              "name": "Your Two Characters",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "Every player has two characters:\n- **Real character:** who you are in Stillwater.\n- **Game Avatar:** who you are inside WSO. Can look completely different.\n\nThey have **separate stats and separate HP**."
+            },
+            {
+              "name": "Character Creation Steps",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "1. Make your real character.\n2. Build your Game Avatar.\n3. Pick your **Title** (Role + Element).\n4. Pick **Boons & Flaws** (optional).\n5. Spend **5 stat points** for each character.\n6. Write **3 starting abilities**.\n7. Submit."
+            }
+          ]
+        },
+        {
+          "name": "✨ TITLES: ELEMENTS",
+          "cards": [
+            {
+              "name": "About Titles",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "Your **Title** is a **Role + Element**, like *Herald of Static*.\n\n- The **Element** is **WHAT** your Magic is.\n- The **Role** is **HOW** you use it.\n\nYou pick your own. 12 Elements × 10 Roles = **120 possible Titles**.\n\n⚠️ **Titles are permanent.**"
+            },
+            {
+              "name": "Static",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Static**\n\nTheme: Electricity, noise, interference.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Signal",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Signal**\n\nTheme: Sound, communication, transmission.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Echo",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Echo**\n\nTheme: Memory, repetition, copies.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Dream",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Dream**\n\nTheme: Sleep, illusion, the subconscious.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Rot",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Rot**\n\nTheme: Decay, weakening, things falling apart.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Bloom",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Bloom**\n\nTheme: Growth, life, healing.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Glare",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Glare**\n\nTheme: Light, heat, exposure.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Hush",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Hush**\n\nTheme: Silence, shadow, hiding.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Weight",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Weight**\n\nTheme: Gravity, pressure, force.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Pulse",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Pulse**\n\nTheme: Heartbeat, emotion, rhythm.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Glitch",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Glitch**\n\nTheme: Errors, rule-breaking, randomness.\n\nEvery ability you make must fit this theme."
+            },
+            {
+              "name": "Frost",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Element: Frost**\n\nTheme: Cold, stillness, preservation.\n\nEvery ability you make must fit this theme."
+            }
+          ]
+        },
+        {
+          "name": "🎭 TITLES: ROLES",
+          "cards": [
+            {
+              "name": "Title Rules",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "- Roles **lean** toward a category. They don't lock you in.\n- **At least 1** of your starting 3 abilities must match your Role's lean.\n- Every ability must fit your **Element's** theme.\n- Your Title is **permanent**."
+            },
+            {
+              "name": "Herald",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Herald**\n\nBroadcasts the element outward. Wide, spread-out effects.\n\n**Leans toward:** Offense"
+            },
+            {
+              "name": "Breaker",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Breaker**\n\nDestroys with it. Hits hard, single target.\n\n**Leans toward:** Offense"
+            },
+            {
+              "name": "Warden",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Warden**\n\nGuards with it. Walls, shields, protecting others.\n\n**Leans toward:** Defense"
+            },
+            {
+              "name": "Drifter",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Drifter**\n\nMoves through it. Dodging, repositioning, escaping.\n\n**Leans toward:** Defense"
+            },
+            {
+              "name": "Mender",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Mender**\n\nRepairs with it. Healing, fixing, undoing damage.\n\n**Leans toward:** Support"
+            },
+            {
+              "name": "Carrier",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Carrier**\n\nGives it to others. Buffs and empowering allies.\n\n**Leans toward:** Support"
+            },
+            {
+              "name": "Taker",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Taker**\n\nSteals it from others. Drains, debuffs, siphons.\n\n**Leans toward:** Offense / Support"
+            },
+            {
+              "name": "Weaver",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Weaver**\n\nShapes it into things. Constructs, traps, tools.\n\n**Leans toward:** Utility"
+            },
+            {
+              "name": "Caller",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Caller**\n\nSummons things made of it. Minions, creatures, familiars.\n\n**Leans toward:** Utility"
+            },
+            {
+              "name": "Reader",
+              "labels": [
+                "Titles"
+              ],
+              "desc": "**Role: Reader**\n\nSenses and understands it. Info, tracking, weak points.\n\n**Leans toward:** Utility"
+            }
+          ]
+        },
+        {
+          "name": "🔮 MAGIC & ABILITIES",
+          "cards": [
+            {
+              "name": "Magic",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "Your Game Avatar's power, granted by WSO and built around your **Title**.\n\nMagic costs **MP (Magic Points)**.\n\n⚠️ **Whatever you pick for your Magic is PERMANENT and will shape your other powers later in the story.**"
+            },
+            {
+              "name": "Custom Abilities",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "You make your **own** abilities. Every ability picks:\n- **One category** (Offense, Defense, Support, Utility)\n- **One tier** (Hum, Ring, Roar, Quiet)\n\nStaff approve every ability before you can use it."
+            },
+            {
+              "name": "Categories",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "- **Offense:** deals damage\n- **Defense:** blocks, reduces, or redirects damage\n- **Support:** heals or boosts allies\n- **Utility:** movement, sensing, or out-of-combat use"
+            },
+            {
+              "name": "Tiers",
+              "labels": [
+                "Mechanics",
+                "Combat"
+              ],
+              "desc": "| Tier | Cost | Damage / Block / Heal | Unlocks |\n|---|---|---|---|\n| Hum | 3 MP | 8 | Start |\n| Ring | 6 MP | 15 | Lv 5 |\n| Roar | 10 MP | 25 | Lv 10 |\n| Quiet | 16 MP | 40 (once per fight) | Lv 15 |\n\nDefense and healing use the same numbers as damage."
+            },
+            {
+              "name": "Ability Rules",
+              "labels": [
+                "Mechanics",
+                "Rules"
+              ],
+              "desc": "- One main effect, **at most one** side effect.\n- **Banned:** instant kills, time stop, mind control of another player's character without consent, knowing everything.\n- Upgrading an ability to a higher tier needs **re-approval**.\n- Start with **3** abilities, +1 at **Lv 5, 10, 15, 20** (7 total)."
+            },
+            {
+              "name": "Ability Tag (REQUIRED)",
+              "labels": [
+                "Combat",
+                "Rules"
+              ],
+              "desc": "Every combat action **must** end with this tag:\n\n**[ Ability Name | Tier | 15 DMG | 6 MP ]**\n\n⚠️ **No tag = your action doesn't count.**"
+            },
+            {
+              "name": "Blank Disk",
+              "labels": [
+                "Items"
+              ],
+              "desc": "An extremely rare item. The **only** way to change your Magic.\n\n- Rare event rewards and rare finds only. Never buyable.\n- One use. One per character, ever."
+            }
+          ]
+        },
+        {
+          "name": "📊 STATS",
+          "cards": [
+            {
+              "name": "Stat System",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "**Magic** uses numbers. Everything else uses **letter grades**:\n\n**F → E → D → C → B → A → S**\n\nJust look up your letter. No math."
+            },
+            {
+              "name": "Durability",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "Your **HP**.\n\n| F | E | D | C | B | A | S |\n|---|---|---|---|---|---|---|\n| 40 | 50 | 60 | 75 | 90 | 110 | 135 |"
+            },
+            {
+              "name": "Strength",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "Your **basic attack damage**.\n\n| F | E | D | C | B | A | S |\n|---|---|---|---|---|---|---|\n| 2 | 3 | 4 | 5 | 7 | 9 | 12 |"
+            },
+            {
+              "name": "Stamina",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "**Physical actions per fight.** Basic attacks and Recharge each use 1.\n\n| F | E | D | C | B | A | S |\n|---|---|---|---|---|---|---|\n| 3 | 4 | 5 | 6 | 7 | 8 | 10 |"
+            },
+            {
+              "name": "Speed",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "- Higher letter **acts first**.\n- Higher letter **wins chases and escapes**.\n- You can **dodge one attack per fight** if your Speed is higher than the attacker's."
+            },
+            {
+              "name": "Magic (MP)",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "- Base **20 MP**.\n- **+3 MP** per point.\n- Max **15 points** in Magic."
+            },
+            {
+              "name": "Points & Upgrades",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "- Everyone starts at **E** in all letter stats and **20 MP**.\n- **5 points** at creation, **+2 points** every level.\n\n| Upgrade | F→E | E→D | D→C | C→B | B→A | A→S |\n|---|---|---|---|---|---|---|\n| Cost | 1 | 1 | 2 | 2 | 3 | 4 |\n\nYour real character and Game Avatar have **separate** stats."
+            }
+          ]
+        },
+        {
+          "name": "⚖️ BOONS & FLAWS",
+          "cards": [
+            {
+              "name": "Boons & Flaws Rules",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "- Pick **up to 2 Boons**. Every Boon you take requires **1 Flaw**.\n- You can take up to **2 Flaws** with no Boons, just for RP.\n- You **can't** take a Boon and its opposite Flaw.\n- They apply to **both** your real character and your Game Avatar.\n- **Permanent.** A Blank Disk does not change them."
+            },
+            {
+              "name": "BOON: Sturdy",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**+10 HP**\n\nOpposite Flaw: **Glass Jaw**"
+            },
+            {
+              "name": "BOON: Hard Hitter",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Basic attack +1 damage**\n\nOpposite Flaw: **Weak Arm**"
+            },
+            {
+              "name": "BOON: Quick Start",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Always act first in round 1 (ties go to Speed)**\n\nOpposite Flaw: **Slowpoke**"
+            },
+            {
+              "name": "BOON: Second Wind",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Once per fight, Recharge restores 10 MP instead of 6**"
+            },
+            {
+              "name": "BOON: Iron Will",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Once per fight, survive a hit that would drop you to 0 HP at 1 HP instead**"
+            },
+            {
+              "name": "BOON: Lucky",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Once per fight, dodge one attack no matter the Speed**\n\nOpposite Flaw: **Clumsy**"
+            },
+            {
+              "name": "BOON: Iron Gut",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Healing items heal +3**\n\nOpposite Flaw: **Lightweight**"
+            },
+            {
+              "name": "BOON: Pack Rat",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**+3 inventory slots, and 4 consumables per fight**\n\nOpposite Flaw: **Butterfingers**"
+            },
+            {
+              "name": "BOON: Haggler",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Items cost 10 Notes / $2 less (min 1)**\n\nOpposite Flaw: **Broke**"
+            },
+            {
+              "name": "BOON: Tinkerer",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Combiner is free, and once a week you can combine 3 items**"
+            },
+            {
+              "name": "BOON: Streetwise",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**+1 Speed letter in Overworld chases and escapes**"
+            },
+            {
+              "name": "BOON: Grinder",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**+5 XP on every approved training, PVE, and PVP log**"
+            },
+            {
+              "name": "FLAW: Glass Jaw",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**-10 HP**"
+            },
+            {
+              "name": "FLAW: Weak Arm",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Basic attack -1 damage (min 1)**"
+            },
+            {
+              "name": "FLAW: Slowpoke",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Always act last in round 1**"
+            },
+            {
+              "name": "FLAW: Clumsy",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Can never dodge with Speed**"
+            },
+            {
+              "name": "FLAW: Lightweight",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Healing items heal -3**"
+            },
+            {
+              "name": "FLAW: Butterfingers",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Max 2 consumables per fight**"
+            },
+            {
+              "name": "FLAW: Broke",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Start with no money, and items cost 10 Notes / $2 more**"
+            },
+            {
+              "name": "FLAW: Tired",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**-1 Stamina action per fight**"
+            },
+            {
+              "name": "FLAW: Hothead",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**If someone insults you mid-fight, your next action has to target them**"
+            },
+            {
+              "name": "FLAW: Coward",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Below 15 HP, you have to try to escape on your turn**"
+            },
+            {
+              "name": "FLAW: Phobia",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**Pick a fear. When it's present, you lose your first turn**"
+            },
+            {
+              "name": "FLAW: Loud",
+              "labels": [
+                "Boons & Flaws"
+              ],
+              "desc": "**You can never sneak. Every stealth attempt fails.**"
+            }
+          ]
+        },
+        {
+          "name": "⚔️ COMBAT",
+          "cards": [
+            {
+              "name": "How Combat Works",
+              "labels": [
+                "Combat"
+              ],
+              "desc": "- **Turn-based.**\n- **Your turn:** 1 action (ability, basic attack, item, or Recharge) plus movement.\n- **Turn order:** players go in the order they joined the fight, then enemies act. Higher Speed goes first."
+            },
+            {
+              "name": "Damage, Block & Heal",
+              "labels": [
+                "Combat"
+              ],
+              "desc": "| | Basic | Hum | Ring | Roar | Quiet |\n|---|---|---|---|---|---|\n| Amount | Strength | 8 | 15 | 25 | 40 |\n| Cost | 1 Stamina | 3 MP | 6 MP | 10 MP | 16 MP |\n\nDefense blocks and healing restores the same amount as same-tier damage."
+            },
+            {
+              "name": "Recharge",
+              "labels": [
+                "Combat"
+              ],
+              "desc": "Skip your attack to get back **6 MP**. Uses 1 Stamina action."
+            },
+            {
+              "name": "Losing in WSO",
+              "labels": [
+                "Combat"
+              ],
+              "desc": "Right now, losing a fight in WSO has no lasting consequences. It's just a game."
+            },
+            {
+              "name": "Fighting in the Overworld",
+              "labels": [
+                "Combat"
+              ],
+              "desc": "Fights in Stillwater are **life or death.**"
+            }
+          ]
+        },
+        {
+          "name": "🎒 ITEMS & GEAR",
+          "cards": [
+            {
+              "name": "Money",
+              "labels": [
+                "Items"
+              ],
+              "desc": "- **WSO:** **Notes**. Start with **100**.\n- **Overworld:** dollars. Start with **$50**."
+            },
+            {
+              "name": "Inventory Rules",
+              "labels": [
+                "Items"
+              ],
+              "desc": "- Using an item **takes your action**.\n- Max **3 consumables per fight**.\n- **10 inventory slots.** Same items stack up to 5 per slot.\n- Get items from shops, staff PVE drops, and quest/event rewards."
+            },
+            {
+              "name": "Minor Potion (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Heal **8 HP**. **20 Notes**."
+            },
+            {
+              "name": "Potion (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Heal **15 HP**. **50 Notes**."
+            },
+            {
+              "name": "Mega Potion (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Heal **25 HP**. **120 Notes**."
+            },
+            {
+              "name": "Mana Drop (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Restore **6 MP**. **40 Notes**."
+            },
+            {
+              "name": "Smoke Bomb (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Escape a fight automatically, ignoring Speed. **60 Notes**."
+            },
+            {
+              "name": "Return Scroll (WSO)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Teleport back to Firstlight Isle (out of combat only). **30 Notes**."
+            },
+            {
+              "name": "Snack (Overworld)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Cookie, chips, etc. Heal **8 HP**. **$2**."
+            },
+            {
+              "name": "Meal (Overworld)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Burger, pizza, etc. Heal **15 HP**. **$8**."
+            },
+            {
+              "name": "First Aid Kit (Overworld)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Heal **25 HP** *or* treat one injury. **$25**."
+            },
+            {
+              "name": "Flashlight (Overworld)",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Needed in dark areas. **$10**."
+            },
+            {
+              "name": "Gear",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Equip **1 weapon, 1 armor, 1 accessory**.\n\n- **Weapon upgrades** (rare): +1 or +2 basic attack damage\n- **Armor** (rare): +5 or +10 HP\n- **Accessory** (rare): one small perk (e.g. +1 Stamina action, +3 MP)"
+            },
+            {
+              "name": "Weapon Types",
+              "labels": [
+                "Items"
+              ],
+              "desc": "Pick **any object** as your weapon: sword, umbrella, frying pan, guitar, gun. It's flavor. Damage still comes from your **Strength** letter (plus upgrades).\n\n**Guns:** allowed. **Very hard to get** in the Overworld. In WSO they're fine and not especially rare."
+            },
+            {
+              "name": "The Combiner",
+              "labels": [
+                "Items"
+              ],
+              "desc": "On **Firstlight Isle**. Merge two items into one new (probably ridiculous) item for **50 Notes**. Write it up; staff approve it.\n\n> I COMBINED A SPOON AND A SMOKE BOMB!! NOW I HAVE NO SPOON AND NO SMOKE BOMB :D — HELPR"
+            }
+          ]
+        },
+        {
+          "name": "📈 LEVELING & XP",
+          "cards": [
+            {
+              "name": "Levels",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "- **150 XP per level**, every level.\n- Max level: **20**.\n- Every level: **+2 stat points**.\n- New abilities at **Lv 5, 10, 15, 20**.\n- No level caps. Staff may award extra XP for great RP."
+            },
+            {
+              "name": "XP Sources",
+              "labels": [
+                "Mechanics"
+              ],
+              "desc": "| Source | XP |\n|---|---|\n| Weekly canon event | 100 |\n| Ruler fight / big event win | +50 |\n| Staff-run PVE | 25 small / 50 big |\n| Training log (approved) | 10 (max 3/day) |\n| Approved PVP log | 30 win / 10 loss |\n| Exceptional PVP log | Instant rank-up |"
+            },
+            {
+              "name": "Logs",
+              "labels": [
+                "Mechanics",
+                "Rules"
+              ],
+              "desc": "Post logs in the Discord for approval:\n- **#pvp-logs** for fights\n- **#training-logs** for Overworld training\n- **#pve-logs** for staff PVE\n\nXP only counts after a staff member or helper approves it."
+            }
+          ]
+        },
+        {
+          "name": "👾 BESTIARY: FIRSTLIGHT ISLE",
+          "cards": [
+            {
+              "name": "Fluffbit",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Minion.** A puffball bunny with a little antenna.\n\n**Bonk:** Hum, 8 DMG."
+            },
+            {
+              "name": "Puddlejelly",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Minion.** A wobbly blue slime that squeaks.\n\n**Splash:** Hum, 8 DMG."
+            },
+            {
+              "name": "Dennis the Training Dummy",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Standard.** HELPR's practice dummy. Fights back. Nobody knows why.\n\n**Wobble Slap:** Hum, 8 DMG.\n**Stand There:** Hum, blocks 8.\n\n> THIS IS DENNIS!! DENNIS IS A DUMMY!! DON'T TELL HIM I SAID THAT :D"
+            },
+            {
+              "name": "Cloudmoth",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Standard.** A fluffy moth that sheds glittery dust.\n\n**Glitter Dust:** Hum, 8 DMG. Target's next attack does half."
+            },
+            {
+              "name": "Sentry Stone",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Elite.** One of the standing stones around the Core, awake and grumpy.\n\n**Stone Fist:** Hum, 8 DMG.\n**Ground Slam:** Ring, 15 DMG to everyone in front."
+            },
+            {
+              "name": "King Fluffbit",
+              "labels": [
+                "Bestiary"
+              ],
+              "desc": "**Boss.** A Fluffbit the size of a house with a tiny crown.\n\n**Royal Bonk:** Hum.\n**Carrot Barrage:** Ring, hits everyone.\n**Belly Flop:** Roar, 25 DMG."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": 2,
+      "title": "Unlock after the Arc 1 finale",
+      "lists": [
+        {
+          "name": "⚡ RESONANCE",
+          "cards": [
+            {
+              "name": "Resonance",
+              "labels": [
+                "Resonance"
+              ],
+              "desc": "When the Core broke, your Magic bled into your real self and awakened as **Resonance**. People who have it are **Resonants**.\n\n- **Mirror:** your Resonance has the same abilities as your Magic, in real-world versions.\n- Works in the **Overworld** until the worlds merge.\n- Staff can approve **alterations** later to make it better or more unique."
+            },
+            {
+              "name": "Focus (FP)",
+              "labels": [
+                "Resonance"
+              ],
+              "desc": "Resonance costs **FP (Focus)**.\n- Base **20 FP**. Each Magic point gives **+3 MP and +3 FP**.\n- Same tier costs as MP: Hum 3, Ring 6, Roar 10, Quiet 16."
+            },
+            {
+              "name": "Breathe",
+              "labels": [
+                "Resonance",
+                "Combat"
+              ],
+              "desc": "Skip your attack to get back **6 FP**. Uses 1 Stamina action."
+            },
+            {
+              "name": "Traces",
+              "labels": [
+                "Resonance"
+              ],
+              "desc": "Resonance shows on your body as **Traces**: circuit-style lines with thick block segments and panel shapes around the joints, like the seams of a machine under your skin.\n\n- Any limb(s). Any color you choose.\n- Proof the Core is broken. Your power came from inside the game."
+            },
+            {
+              "name": "Traces: Flare",
+              "labels": [
+                "Resonance"
+              ],
+              "desc": "Traces flare when you use Resonance:\n- **Hum:** faint glow\n- **Ring:** bright glow\n- **Roar:** lines pulse and light spills past them\n- **Quiet:** Traces go fully **dark** for a beat, then flare all at once"
+            },
+            {
+              "name": "Traces: Lv 20",
+              "labels": [
+                "Resonance"
+              ],
+              "desc": "Traces stay the same size until **Lv 20**. Then they grow outward from your starting limbs, connect across your chest and back, and a few lines reach your face."
+            }
+          ]
+        },
+        {
+          "name": "💥 CRASHES",
+          "cards": [
+            {
+              "name": "Crashes",
+              "labels": [
+                "Crashes"
+              ],
+              "desc": "Losing in WSO isn't just a game anymore.\n\nGoing down in WSO (**PVE or PVP**) is a **Crash**: your Avatar is force-logged out and you wake up at your PC in Stillwater.\n\nThe Overworld is still **life or death**."
+            },
+            {
+              "name": "1st Crash: Glitched",
+              "labels": [
+                "Crashes"
+              ],
+              "desc": "Dazed. **No Resonance for 1 hour** real time."
+            },
+            {
+              "name": "2nd Crash: Injured",
+              "labels": [
+                "Crashes"
+              ],
+              "desc": "A real injury you RP. Must be **treated before the next weekly event** (medical RP, Mender abilities, healing items, or a First Aid Kit)."
+            },
+            {
+              "name": "3rd Crash: Corrupted",
+              "labels": [
+                "Crashes"
+              ],
+              "desc": "Pick a **memory** your character loses, plus an **injury** that needs treatment the same way."
+            },
+            {
+              "name": "Crash Rules",
+              "labels": [
+                "Crashes",
+                "Rules"
+              ],
+              "desc": "- Crash count **resets every arc**.\n- **No charbanning.** The only way you sit out is if an injury isn't treated in time, and then only the next weekly event. Free RP is still allowed.\n- **Permadeath in WSO** only if you agree."
+            }
+          ]
+        },
+        {
+          "name": "👽 LUMARI",
+          "cards": [
+            {
+              "name": "The Lumari",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "An alien race whose real world was devoured. What's left of it is preserved inside WSO. The Lumari there are **survivors, not NPCs**.\n\nSingular and plural: *a Lumari, the Lumari.*"
+            },
+            {
+              "name": "Lumari: Look",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "- Horns, with a shape unique to each Lumari\n- Bright, saturated skin in any color\n- Sharp teeth and glowing eyes\n- Limbs and fingers just slightly too long\n- Faces that go eerily still when they're serious"
+            },
+            {
+              "name": "Lumari: Culture",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "Loud, snarky, and competitive. They **rank everything**. Insults are how they show affection. Underneath the attitude is grief.\n\nTheir homeworld, **Ilunae**, was built around music. Most Lumari still hum without realizing it, then stop themselves."
+            },
+            {
+              "name": "Lumari: Names",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "Day to day, Lumari go by **handles**. Their **real names** are verses from their own song, each with a meaning. They only tell their real name to someone they trust with their life."
+            },
+            {
+              "name": "Lumari: Echoes",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "Small objects saved from their dead world. Each one holds a tiny piece of Ilunae's song. Losing one is losing a piece of home forever. (RP flavor only. Lost on a Crash.)"
+            },
+            {
+              "name": "Lumari: Typing Quirks",
+              "labels": [
+                "Lumari"
+              ],
+              "desc": "Every Lumari has a typing quirk. It's how their voice comes through text."
+            },
+            {
+              "name": "Aurenne-That-Remains",
+              "labels": [
+                "Lumari",
+                "Lore"
+              ],
+              "desc": "The Lumari's old capital, **Aurenne** (\"the bright city\"), preserved inside WSO at the exact second their world ended. Towers of colored glass, bridges, concert halls. Blinding colors and **no sound at all**.\n\nIt's not officially part of the game. Its edges glitch, and the skybox is wrong."
+            },
+            {
+              "name": "Playing a Lumari",
+              "labels": [
+                "Lumari",
+                "Rules"
+              ],
+              "desc": "- One Lumari OC per player. Around 20 server-wide.\n- Played in WSO instead of your Avatar. One set of stats.\n- Same Magic system: Title, custom abilities, MP.\n- No Resonance until the worlds merge, then they gain Traces.\n- Lose an echo on a Crash."
+            }
+          ]
+        },
+        {
+          "name": "💔 IN MEMORY",
+          "cards": [
+            {
+              "name": "HELPR",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "> my name is saelu. i'm sorry i didn't say it sooner.\n\n**[ HELPR NOT FOUND ]**"
+            },
+            {
+              "name": "The Core (Broken)",
+              "labels": [
+                "Lore"
+              ],
+              "desc": "The Core shattered. Its shards scattered and fell with pieces of Firstlight Isle, each one corrupting a world of WSO.\n\nEach shard returned to the Core breaks the seal on the next portal."
+            }
+          ]
+        },
+        {
+          "name": "🕳 DARK WORLDS",
+          "cards": [
+            {
+              "name": "Dark Worlds",
+              "labels": [
+                "Dark Worlds"
+              ],
+              "desc": "Each fallen shard corrupted one of WSO's worlds into a **Dark World**.\n\n- Only the **current arc's portal** is open.\n- Each Dark World has a **Ruler** holding the shard.\n- Beat the Ruler, take the shard, and the world is **restored**. That's the only way to see what it really looked like.\n- Dark Worlds are **loud** and full of music. If the music ever starts cutting out... leave."
+            },
+            {
+              "name": "Arc 2: The Overgrowth",
+              "labels": [
+                "Dark Worlds"
+              ],
+              "desc": "**Normally:** Greenhollow, a cheerful starter forest and meadow zone.\n**Now:** everything grows wrong and won't stop.\n**Ruler:** Keeper Fennick, the Grove Keeper, stuck handing out impossible quests."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "part": 3,
+      "title": "Dark Worlds Arcs 3-5 (unlock per arc)",
+      "lists": [
+        {
+          "name": "🕳 DARK WORLDS (ARCS 3–5)",
+          "cards": [
+            {
+              "name": "Arc 3: Low Tide",
+              "labels": [
+                "Dark Worlds"
+              ],
+              "desc": "**Normally:** Brightwater Bay, a beach and harbor fishing zone.\n**Now:** the water's gone and a drowned town is left. Its creatures crawl into Stillwater at night.\n**Ruler:** Brinemaw, the Bay's old raid boss."
+            },
+            {
+              "name": "Arc 4: The Clearance",
+              "labels": [
+                "Dark Worlds"
+              ],
+              "desc": "**Normally:** Coinspire Market, WSO's big trade city.\n**Now:** everything is for sale, including you. It's bleeding into the **mall**.\n**Ruler:** King Pricewell, the Merchant King."
+            },
+            {
+              "name": "Arc 5: The Unwritten",
+              "labels": [
+                "Dark Worlds"
+              ],
+              "desc": "**Normally:** the Endless Archive, a library zone.\n**Now:** pages erasing, history deleting itself. It's bleeding into the **school**.\n**Ruler:** the Archivist."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

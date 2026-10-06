@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://p.trellocdn.com/power-up.min.js"></script>
+<script src="./config.js"></script>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;margin:0;padding:16px;background:#0B0B0F;color:#EDEDF2}
+  h2{margin:0 0 4px;color:#B79CFF;font-size:18px}
+  p{margin:4px 0 12px;color:#9A9AAB;font-size:13px}
+  .part{background:#17171D;border-radius:8px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .part b{display:block;font-size:14px}.part span{font-size:12px;color:#9A9AAB}
+  .done{color:#2EC4B6!important}
+  button{background:#8A5CF6;color:#fff;border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+  button:disabled{background:#3a3a46;cursor:default}
+  #auth{width:100%;margin-bottom:12px}
+  #log{background:#000;border-radius:6px;padding:8px;height:150px;overflow:auto;font:12px Consolas,monospace;color:#9A9AAB;white-space:pre-wrap}
+  .warn{color:#E5484D}
+</style>
+</head>
+<body>
+<h2>Resonance: Core Importer</h2>
+<p>Builds lists, cards, and labels on <b>this board</b>. Only import Part 2 after the Arc 1 finale, and Part 3 as each Dark World arc starts.</p>
+<button id="auth">Authorize</button>
+<div id="parts"></div>
+<div id="log">Ready.</div>
+<script>
+var t = window.TrelloPowerUp.iframe(window.RC_CONFIG);
+var KEY = window.RC_CONFIG.appKey, API = "https://api.trello.com/1", TOKEN = null, DATA = null, busy = false;
+var logEl = document.getElementById("log");
+function log(m, cls){ var d=document.createElement("div"); if(cls) d.className=cls; d.textContent=m; logEl.appendChild(d); logEl.scrollTop=logEl.scrollHeight; }
+var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+
+async function call(method, path, body){
+  for (var i=0;i<5;i++){
+    var url = API + path + (path.indexOf("?")>-1?"&":"?") + "key=" + KEY + "&token=" + TOKEN;
+    var res = await fetch(url, { method: method, body: body ? new URLSearchParams(body) : undefined });
+    if (res.status === 429){ await sleep(2000 + i*2000); continue; }
+    if (!res.ok){ throw new Error(res.status + " on " + path + ": " + (await res.text())); }
+    await sleep(150);
+    return res.json();
+  }
+  throw new Error("Rate limited too many times. Try again in a minute.");
+}
+
+async function importPart(n){
+  if (busy) return; busy = true; setButtons();
+  try {
+    var part = DATA.parts.find(function(p){ return p.part === n; });
+    var done = (await t.get("board","shared","rcImported")) || [];
+    if (done.indexOf(n) > -1 && !confirm("Part "+n+" was already imported on this board. Import it again (duplicates)?")) { busy=false; setButtons(); return; }
+    var board = await t.board("id");
+    var existing = {}; (await call("GET","/boards/"+board.id+"/labels")).forEach(function(l){ if(l.name) existing[l.name]=l.id; });
+    var labelIds = {};
+    for (var name in DATA.labels){
+      labelIds[name] = existing[name] || (await call("POST","/labels",{name:name,color:DATA.labels[name],idBoard:board.id})).id;
+    }
+    var total = part.lists.reduce(function(a,l){ return a + l.cards.length; }, 0), count = 0;
+    log("Part "+n+": "+part.title+" — "+part.lists.length+" lists, "+total+" cards");
+    for (var li=0; li<part.lists.length; li++){
+      var lst = part.lists[li];
+      var list = await call("POST","/lists",{name:lst.name,idBoard:board.id,pos:"bottom"});
+      for (var ci=0; ci<lst.cards.length; ci++){
+        var c = lst.cards[ci];
+        var ids = c.labels.map(function(x){ return labelIds[x]; }).filter(Boolean).join(",");
+        await call("POST","/cards",{idList:list.id,name:c.name,desc:c.desc,idLabels:ids,pos:"bottom"});
+        count++; log("["+count+"/"+total+"] "+lst.name+" → "+c.name);
+      }
+    }
+    done.push(n); await t.set("board","shared","rcImported",done);
+    log("Part "+n+" done.", "done");
+  } catch(e){ log("ERROR: "+e.message, "warn"); }
+  busy = false; setButtons();
+}
+
+async function setButtons(){
+  var done = (await t.get("board","shared","rcImported")) || [];
+  DATA.parts.forEach(function(p){
+    var b = document.getElementById("btn"+p.part), s = document.getElementById("st"+p.part);
+    b.disabled = busy || !TOKEN;
+    if (done.indexOf(p.part) > -1){ s.textContent = "Imported ✓"; s.className = "done"; }
+  });
+}
+
+async function init(){
+  if (!KEY || KEY.indexOf("PASTE_") === 0){ log("Add your API key in config.js first.","warn"); return; }
+  DATA = await (await fetch("./resonance_core_trello.json")).json();
+  var wrap = document.getElementById("parts");
+  DATA.parts.forEach(function(p){
+    var cards = p.lists.reduce(function(a,l){ return a + l.cards.length; }, 0);
+    var div = document.createElement("div"); div.className = "part";
+    div.innerHTML = "<div><b>Part "+p.part+": "+p.title+"</b><span id='st"+p.part+"'>"+p.lists.length+" lists · "+cards+" cards</span></div>";
+    var btn = document.createElement("button"); btn.id = "btn"+p.part; btn.textContent = "Import";
+    btn.onclick = function(){ importPart(p.part); };
+    div.appendChild(btn); wrap.appendChild(div);
+  });
+  var api = t.getRestApi();
+  var authBtn = document.getElementById("auth");
+  if (await api.isAuthorized()){ TOKEN = await api.getToken(); authBtn.textContent = "Authorized ✓"; authBtn.disabled = true; }
+  authBtn.onclick = async function(){
+    try { await api.authorize({ scope: "read,write" }); TOKEN = await api.getToken();
+      authBtn.textContent = "Authorized ✓"; authBtn.disabled = true; log("Authorized."); setButtons();
+    } catch(e){ log("Authorization cancelled or failed: "+e.message, "warn"); }
+  };
+  setButtons();
+}
+init();
+</script>
+</body>
+</html>
