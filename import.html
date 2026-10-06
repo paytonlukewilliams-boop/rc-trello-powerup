@@ -14,7 +14,7 @@
   button{background:#8A5CF6;color:#fff;border:0;border-radius:6px;padding:8px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
   button:disabled{background:#3a3a46;cursor:default}
   #auth{width:100%;margin-bottom:12px}
-  #log{background:#000;border-radius:6px;padding:8px;height:150px;overflow:auto;font:12px Consolas,monospace;color:#9A9AAB;white-space:pre-wrap}
+  #log{background:#000;border-radius:6px;padding:8px;height:140px;overflow:auto;font:12px Consolas,monospace;color:#9A9AAB;white-space:pre-wrap}
   .warn{color:#E5484D}
 </style>
 </head>
@@ -23,6 +23,16 @@
 <p>Builds lists, cards, and labels on <b>this board</b>. Only import Part 2 after the Arc 1 finale, and Part 3 as each Dark World arc starts.</p>
 <button id="auth">Authorize</button>
 <div id="parts"></div>
+<h2 style="margin-top:14px">Restyle Board</h2>
+<p>Renames lists and cards to the tagged typewriter style, adds divider cards, and sets full-size color covers. Never overwrites image covers you've added. Safe to run again after importing Part 2 or 3.</p>
+<div class="part" style="flex-wrap:wrap">
+  <div style="font-size:13px;line-height:1.9">
+    <label><input type="checkbox" id="optFont" checked> Typewriter font</label><br>
+    <label><input type="checkbox" id="optCovers" checked> Full-size color covers</label><br>
+    <label><input type="checkbox" id="optDividers" checked> Divider cards</label>
+  </div>
+  <button id="btnRestyle">Restyle Board</button>
+</div>
 <div id="log">Ready.</div>
 <script>
 var t = window.TrelloPowerUp.iframe(window.RC_CONFIG);
@@ -73,6 +83,98 @@ async function importPart(n){
   busy = false; setButtons();
 }
 
+
+// ================= RESTYLE =================
+var STYLE = {
+  "📌 START HERE":            {name:"[RC] OVERVIEW",            tag:"OV", color:"purple", div:["Glossary"]},
+  "📜 RULES":                 {name:"[RC] RULES",               tag:"RL", color:"red",    div:["Combat Rules"]},
+  "🌍 THE WORLD":             {name:"[RC] THE WORLD",           tag:"WD", color:"sky",    div:["Firstlight Isle"]},
+  "🧍 CHARACTERS":            {name:"[RC] CHARACTERS",          tag:"CH", color:"blue",   div:[]},
+  "✨ TITLES: ELEMENTS":      {name:"[RC] TITLES: ELEMENTS",    tag:"EL", color:"purple", div:["Static"], special:{"About Titles":"TT"}},
+  "🎭 TITLES: ROLES":         {name:"[RC] TITLES: ROLES",       tag:"RO", color:"yellow", div:["Herald"], special:{"Title Rules":"TT"}},
+  "🔮 MAGIC & ABILITIES":     {name:"[RC] MAGIC & ABILITIES",   tag:"MG", color:"purple", div:["Ability Tag (REQUIRED)"]},
+  "📊 STATS":                 {name:"[RC] STATS",               tag:"ST", color:"sky",    div:["Durability","Points & Upgrades"]},
+  "⚖️ BOONS & FLAWS":         {name:"[RC] BOONS & FLAWS",       tag:"BF", color:"pink",   div:["BOON: Sturdy","FLAW: Glass Jaw"]},
+  "⚔️ COMBAT":                {name:"[RC] COMBAT",              tag:"CB", color:"red",    div:["Losing in WSO"]},
+  "🎒 ITEMS & GEAR":          {name:"[RC] ITEMS & GEAR",        tag:"IT", color:"green",  div:["Minor Potion (WSO)","Smoke Bomb (WSO)","Snack (Overworld)","Gear"]},
+  "📈 LEVELING & XP":         {name:"[RC] LEVELING & XP",       tag:"LV", color:"orange", div:["Logs"]},
+  "👾 BESTIARY: FIRSTLIGHT ISLE": {name:"[RC] BESTIARY: FIRSTLIGHT ISLE", tag:"BS", color:"lime", div:["Dennis the Training Dummy","Sentry Stone"]},
+  "⚡ RESONANCE":              {name:"[RC] RESONANCE",           tag:"RS", color:"sky",    div:["Traces"]},
+  "💥 CRASHES":               {name:"[RC] CRASHES",             tag:"CR", color:"black",  div:["1st Crash: Glitched"]},
+  "👽 LUMARI":                {name:"[RC] LUMARI",              tag:"LM", color:"pink",   div:["Aurenne-That-Remains"]},
+  "💔 IN MEMORY":             {name:"[RC] IN MEMORY",           tag:"IM", color:"black",  div:[]},
+  "🕳 DARK WORLDS":           {name:"[RC] DARK WORLDS",         tag:"DW", color:"black",  div:["Arc 2: The Overgrowth"]},
+  "🕳 DARK WORLDS (ARCS 3–5)":{name:"[RC] DARK WORLDS (ARCS 3–5)", tag:"DW", color:"black", div:[]}
+};
+var DIVIDER = "────────────────────";
+function mono(str){
+  var out = "";
+  for (var ch of str){
+    var c = ch.codePointAt(0);
+    if (c>=65 && c<=90) out += String.fromCodePoint(0x1D670 + c - 65);
+    else if (c>=97 && c<=122) out += String.fromCodePoint(0x1D68A + c - 97);
+    else if (c>=48 && c<=57) out += String.fromCodePoint(0x1D7F6 + c - 48);
+    else out += ch;
+  }
+  return out;
+}
+function styledCardName(orig, st, useFont){
+  var tag = (st.special && st.special[orig]) || st.tag, base = orig;
+  if (orig.indexOf("BOON: ")===0){ tag="BN"; base=orig.slice(6); }
+  else if (orig.indexOf("FLAW: ")===0){ tag="FL"; base=orig.slice(6); }
+  var n = "[" + tag + "] " + base.toUpperCase();
+  return useFont ? mono(n) : n;
+}
+function hasImageCover(cv){ return cv && (cv.idAttachment || cv.idUploadedBackground || cv.url || cv.idPlugin); }
+async function putJSON(path, obj){
+  for (var i=0;i<5;i++){
+    var res = await fetch(API + path + "?key=" + KEY + "&token=" + TOKEN, {method:"PUT", headers:{"Content-Type":"application/json"}, body: JSON.stringify(obj)});
+    if (res.status === 429){ await sleep(2000 + i*2000); continue; }
+    if (!res.ok) throw new Error(res.status + " on " + path + ": " + (await res.text()));
+    await sleep(150); return res.json();
+  }
+  throw new Error("Rate limited too many times. Try again in a minute.");
+}
+async function restyle(){
+  if (busy) return; busy = true; setButtons(); document.getElementById("btnRestyle").disabled = true;
+  var useFont = document.getElementById("optFont").checked, useCovers = document.getElementById("optCovers").checked, useDiv = document.getElementById("optDividers").checked;
+  try {
+    var board = await t.board("id");
+    var lists = await call("GET", "/boards/"+board.id+"/lists?fields=name");
+    var done = 0;
+    for (var li=0; li<lists.length; li++){
+      var L = lists[li], st = STYLE[L.name];
+      var restyled = false;
+      if (!st){ // already restyled? match by new name
+        for (var k in STYLE){ if (L.name === STYLE[k].name || L.name === mono(STYLE[k].name)){ st = STYLE[k]; restyled = true; break; } }
+      }
+      if (!st){ log("Skipping list (not part of Resonance: Core): "+L.name); continue; }
+      if (!restyled){
+        await putJSON("/lists/"+L.id, {name: useFont ? mono(st.name) : st.name});
+        log("List → "+st.name);
+      }
+      var cards = await call("GET", "/lists/"+L.id+"/cards?fields=name,pos,cover");
+      cards.sort(function(a,b){ return a.pos - b.pos; });
+      var hasDivider = cards.some(function(c){ return c.name === DIVIDER; });
+      for (var ci=0; ci<cards.length; ci++){
+        var c = cards[ci];
+        if (c.name === DIVIDER) continue;
+        var orig = c.name, upd = {};
+        if (orig.charAt(0) !== "[") upd.name = styledCardName(orig, st, useFont);
+        if (useCovers && !hasImageCover(c.cover)) upd.cover = {color: st.color, size: "full", brightness: "dark"};
+        if (Object.keys(upd).length){ await putJSON("/cards/"+c.id, upd); done++; log("["+done+"] "+(upd.name || c.name)); }
+        if (useDiv && !hasDivider && st.div.indexOf(orig) > -1 && ci > 0){
+          var pos = (cards[ci-1].pos + c.pos) / 2;
+          await call("POST", "/cards", {idList: L.id, name: DIVIDER, pos: String(pos)});
+          log("  + divider before "+orig);
+        }
+      }
+    }
+    log("Restyle done. Add your cover images and background next.", "done");
+  } catch(e){ log("ERROR: "+e.message, "warn"); }
+  busy = false; setButtons(); document.getElementById("btnRestyle").disabled = !TOKEN;
+}
+
 async function setButtons(){
   var done = (await t.get("board","shared","rcImported")) || [];
   DATA.parts.forEach(function(p){
@@ -80,6 +182,7 @@ async function setButtons(){
     b.disabled = busy || !TOKEN;
     if (done.indexOf(p.part) > -1){ s.textContent = "Imported ✓"; s.className = "done"; }
   });
+  document.getElementById("btnRestyle").disabled = busy || !TOKEN;
 }
 
 async function init(){
@@ -94,6 +197,7 @@ async function init(){
     btn.onclick = function(){ importPart(p.part); };
     div.appendChild(btn); wrap.appendChild(div);
   });
+  document.getElementById("btnRestyle").onclick = restyle;
   var api = t.getRestApi();
   var authBtn = document.getElementById("auth");
   if (await api.isAuthorized()){ TOKEN = await api.getToken(); authBtn.textContent = "Authorized ✓"; authBtn.disabled = true; }
