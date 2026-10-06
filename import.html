@@ -106,9 +106,15 @@ var STYLE = {
   "🕳 DARK WORLDS":           {name:"[RC] DARK WORLDS",         tag:"DW", color:"black",  div:["Arc 2: The Overgrowth"]},
   "🕳 DARK WORLDS (ARCS 3–5)":{name:"[RC] DARK WORLDS (ARCS 3–5)", tag:"DW", color:"black", div:[]}
 };
-var DIVIDER = "------------------------------";
+var DIVIDER = "---";
 var OLD_DIVIDER = "────────────────────";
-function isDivider(n){ return n === DIVIDER || n === OLD_DIVIDER || /^-{3,}$/.test(n); }
+function isDivider(n){ return n === OLD_DIVIDER || /^-{3,}$/.test(n); }
+var sepOK = 0, sepManual = 0;
+async function makeSeparator(id){
+  try { await putJSON("/cards/"+id, {name: DIVIDER, cardRole: "separator"}); } catch(e){ await putJSON("/cards/"+id, {name: DIVIDER}); }
+  var c = await call("GET", "/cards/"+id+"?fields=cardRole");
+  if (c.cardRole === "separator") sepOK++; else sepManual++;
+}
 function mono(str){
   var out = "";
   for (var ch of str){
@@ -138,7 +144,7 @@ async function putJSON(path, obj){
   throw new Error("Rate limited too many times. Try again in a minute.");
 }
 async function restyle(){
-  if (busy) return; busy = true; setButtons(); document.getElementById("btnRestyle").disabled = true;
+  if (busy) return; busy = true; sepOK = 0; sepManual = 0; setButtons(); document.getElementById("btnRestyle").disabled = true;
   var useFont = document.getElementById("optFont").checked, useCovers = document.getElementById("optCovers").checked, useDiv = document.getElementById("optDividers").checked;
   try {
     var board = await t.board("id");
@@ -155,24 +161,26 @@ async function restyle(){
         await putJSON("/lists/"+L.id, {name: useFont ? mono(st.name) : st.name});
         log("List → "+st.name);
       }
-      var cards = await call("GET", "/lists/"+L.id+"/cards?fields=name,pos,cover");
+      var cards = await call("GET", "/lists/"+L.id+"/cards?fields=name,pos,cover,cardRole");
       cards.sort(function(a,b){ return a.pos - b.pos; });
       var hasDivider = cards.some(function(c){ return isDivider(c.name); });
       for (var ci=0; ci<cards.length; ci++){
         var c = cards[ci];
-        if (c.name === OLD_DIVIDER){ await putJSON("/cards/"+c.id, {name: DIVIDER}); log("  ~ fixed old divider"); continue; }
-        if (isDivider(c.name)) continue;
+        if (isDivider(c.name)){ if (c.name !== DIVIDER || c.cardRole !== "separator"){ await makeSeparator(c.id); log("  ~ fixed divider"); } continue; }
         var orig = c.name, upd = {};
         if (orig.charAt(0) !== "[") upd.name = styledCardName(orig, st, useFont);
         if (useCovers && !hasImageCover(c.cover)) upd.cover = {color: st.color, size: "full", brightness: "dark"};
         if (Object.keys(upd).length){ await putJSON("/cards/"+c.id, upd); done++; log("["+done+"] "+(upd.name || c.name)); }
         if (useDiv && !hasDivider && st.div.indexOf(orig) > -1 && ci > 0){
           var pos = (cards[ci-1].pos + c.pos) / 2;
-          await call("POST", "/cards", {idList: L.id, name: DIVIDER, pos: String(pos)});
+          var nc = await call("POST", "/cards", {idList: L.id, name: DIVIDER, pos: String(pos)});
+          await makeSeparator(nc.id);
           log("  + divider before "+orig);
         }
       }
     }
+    if (sepManual > 0) log(sepManual + " divider(s) couldn't be turned into separators automatically. Right-click each --- card → Convert to separator card.", "warn");
+    else if (sepOK > 0) log(sepOK + " divider(s) set as separators.", "done");
     log("Restyle done. Add your cover images and background next.", "done");
   } catch(e){ log("ERROR: "+e.message, "warn"); }
   busy = false; setButtons(); document.getElementById("btnRestyle").disabled = !TOKEN;
