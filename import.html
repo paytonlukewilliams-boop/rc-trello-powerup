@@ -23,6 +23,9 @@
 <p>Builds lists, cards, and labels on <b>this board</b>. Only import Part 2 after the Arc 1 finale, and Part 3 as each Dark World arc starts.</p>
 <button id="auth">Authorize</button>
 <div id="parts"></div>
+<h2 style="margin-top:14px">Sync Content</h2>
+<p>Adds new lists and cards from the latest content file and adds "In RP" sections to existing cards. Only touches parts you've already imported, and never overwrites a description you edited yourself. Run Restyle after.</p>
+<div class="part"><div><b>Sync with latest content</b><span>New lists, new cards, RP examples</span></div><button id="btnSync">Sync</button></div>
 <h2 style="margin-top:14px">Restyle Board</h2>
 <p>Renames lists and cards to the tagged typewriter style, adds divider cards, and sets full-size color covers. Never overwrites image covers you've added. Safe to run again after importing Part 2 or 3.</p>
 <div class="part" style="flex-wrap:wrap">
@@ -89,6 +92,9 @@ var STYLE = {
   "📌 START HERE":            {name:"[RC] OVERVIEW",            tag:"OV", color:"purple", div:["Glossary"]},
   "📜 RULES":                 {name:"[RC] RULES",               tag:"RL", color:"red",    div:["Combat Rules"]},
   "🌍 THE WORLD":             {name:"[RC] THE WORLD",           tag:"WD", color:"sky",    div:["Firstlight Isle"]},
+  "🏘️ STILLWATER":           {name:"[RC] STILLWATER",          tag:"SW", color:"green",  div:["Urban Legends"]},
+  "🏝️ FIRSTLIGHT ISLE":       {name:"[RC] FIRSTLIGHT ISLE",     tag:"FI", color:"lime",   div:["Spawn Plaza","The Practice Vault"]},
+  "📖 WORLDSONG LORE":        {name:"[RC] WORLDSONG LORE",      tag:"WL", color:"purple", div:["The Verses"]},
   "🧍 CHARACTERS":            {name:"[RC] CHARACTERS",          tag:"CH", color:"blue",   div:[]},
   "✨ TITLES: ELEMENTS":      {name:"[RC] TITLES: ELEMENTS",    tag:"EL", color:"purple", div:["Static"], special:{"About Titles":"TT"}},
   "🎭 TITLES: ROLES":         {name:"[RC] TITLES: ROLES",       tag:"RO", color:"yellow", div:["Herald"], special:{"Title Rules":"TT"}},
@@ -186,6 +192,64 @@ async function restyle(){
   busy = false; setButtons(); document.getElementById("btnRestyle").disabled = !TOKEN;
 }
 
+
+// ================= SYNC =================
+async function ensureLabels(boardId){
+  var existing = {}; (await call("GET","/boards/"+boardId+"/labels")).forEach(function(l){ if(l.name) existing[l.name]=l.id; });
+  var ids = {};
+  for (var name in DATA.labels){ ids[name] = existing[name] || (await call("POST","/labels",{name:name,color:DATA.labels[name],idBoard:boardId})).id; }
+  return ids;
+}
+var RP_MARK = "\n\n---\n\n### 🎭 In RP";
+async function syncContent(){
+  if (busy) return; busy = true; setButtons();
+  try {
+    var done = (await t.get("board","shared","rcImported")) || [];
+    if (!done.length){ log("Import Part 1 first.","warn"); busy=false; setButtons(); return; }
+    var board = await t.board("id");
+    var labelIds = await ensureLabels(board.id);
+    var lists = await call("GET","/boards/"+board.id+"/lists?fields=name,pos");
+    function findList(orig){ var st = STYLE[orig]; return lists.find(function(l){ return l.name===orig || (st && (l.name===st.name || l.name===mono(st.name))); }); }
+    var addedLists=0, added=0, updated=0, skipped=0;
+    for (var pi=0; pi<DATA.parts.length; pi++){
+      var p = DATA.parts[pi];
+      if (done.indexOf(p.part) < 0) continue;
+      for (var li=0; li<p.lists.length; li++){
+        var lst = p.lists[li], bl = findList(lst.name);
+        if (!bl){
+          var pos = "bottom", prev = li>0 ? findList(p.lists[li-1].name) : null;
+          if (prev){
+            var after = lists.filter(function(l){ return l.pos > prev.pos; }).sort(function(a,b){ return a.pos-b.pos; })[0];
+            if (after) pos = String((prev.pos + after.pos)/2);
+          }
+          bl = await call("POST","/lists",{name:lst.name,idBoard:board.id,pos:pos});
+          lists.push(bl); addedLists++; log("+ list "+lst.name);
+        }
+        var cards = await call("GET","/lists/"+bl.id+"/cards?fields=name,desc");
+        var st = STYLE[lst.name];
+        for (var ci=0; ci<lst.cards.length; ci++){
+          var c = lst.cards[ci];
+          var names = [c.name]; if (st){ names.push(styledCardName(c.name, st, true), styledCardName(c.name, st, false)); }
+          var bc = cards.find(function(x){ return names.indexOf(x.name) > -1; });
+          if (!bc){
+            var ids = c.labels.map(function(x){ return labelIds[x]; }).filter(Boolean).join(",");
+            await call("POST","/cards",{idList:bl.id,name:c.name,desc:c.desc,idLabels:ids,pos:"bottom"});
+            added++; log("+ card "+c.name);
+          } else if ((bc.desc||"").trim() !== c.desc.trim()){
+            var original = c.desc.split(RP_MARK)[0].trim();
+            var boardBase = (bc.desc||"").split(RP_MARK)[0].trim();
+            if (boardBase === original){ await putJSON("/cards/"+bc.id,{desc:c.desc}); updated++; log("~ "+c.name); }
+            else { skipped++; log("skipped (you edited it): "+c.name); }
+          }
+        }
+      }
+    }
+    log("Sync done: "+addedLists+" lists added, "+added+" cards added, "+updated+" cards updated, "+skipped+" skipped.","done");
+    if (addedLists || added) log("Now click Restyle Board to style the new lists and cards.","done");
+  } catch(e){ log("ERROR: "+e.message,"warn"); }
+  busy = false; setButtons();
+}
+
 async function setButtons(){
   var done = (await t.get("board","shared","rcImported")) || [];
   DATA.parts.forEach(function(p){
@@ -194,6 +258,7 @@ async function setButtons(){
     if (done.indexOf(p.part) > -1){ s.textContent = "Imported ✓"; s.className = "done"; }
   });
   document.getElementById("btnRestyle").disabled = busy || !TOKEN;
+  document.getElementById("btnSync").disabled = busy || !TOKEN;
 }
 
 async function init(){
@@ -209,6 +274,7 @@ async function init(){
     div.appendChild(btn); wrap.appendChild(div);
   });
   document.getElementById("btnRestyle").onclick = restyle;
+  document.getElementById("btnSync").onclick = syncContent;
   var api = t.getRestApi();
   var authBtn = document.getElementById("auth");
   if (await api.isAuthorized()){ TOKEN = await api.getToken(); authBtn.textContent = "Authorized ✓"; authBtn.disabled = true; }
