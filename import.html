@@ -201,6 +201,7 @@ async function ensureLabels(boardId){
   return ids;
 }
 var RP_MARK = "\n\n---\n\n### 🎭 In RP";
+function norm(t){ return (t||"").replace(/\s+/g," ").trim(); }
 async function syncContent(){
   if (busy) return; busy = true; setButtons();
   try {
@@ -235,10 +236,9 @@ async function syncContent(){
             var ids = c.labels.map(function(x){ return labelIds[x]; }).filter(Boolean).join(",");
             await call("POST","/cards",{idList:bl.id,name:c.name,desc:c.desc,idLabels:ids,pos:"bottom"});
             added++; log("+ card "+c.name);
-          } else if ((bc.desc||"").trim() !== c.desc.trim()){
-            var original = c.desc.split(RP_MARK)[0].trim();
-            var boardBase = (bc.desc||"").split(RP_MARK)[0].trim();
-            if (boardBase === original){ await putJSON("/cards/"+bc.id,{desc:c.desc}); updated++; log("~ "+c.name); }
+          } else if (norm(bc.desc) !== norm(c.desc)){
+            var known = (c.prev || []).some(function(p){ return norm(p) === norm(bc.desc); });
+            if (known){ await putJSON("/cards/"+bc.id,{desc:c.desc}); updated++; log("~ "+c.name); }
             else { skipped++; log("skipped (you edited it): "+c.name); }
           }
         }
